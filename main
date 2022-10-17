@@ -1,0 +1,55 @@
+#include <math.h>
+#include <stdio.h>
+float stdev(int data[], int n) {
+    float sum = 0.0, mean, SD = 0.0;
+    for (int i = 0; i < n; i++) 
+        sum += data[i];
+    
+    mean = sum / n;
+    for (int i = 0; i < n; i++) 
+        SD += pow(data[i] - mean, 2);
+    
+    return sqrt(SD / n);
+}
+
+void Array_sort(int *data , int n)
+{ 
+    for(int i=0 ; i<n ; i++)
+    {
+        for(int j=0 ; j<n-1 ; j++)
+        {
+            if(data[j]>data[j+1])
+            {
+                int temp        = data[j];
+                data[j]    = data[j+1];
+                data[j+1]  = temp;
+            }
+        }
+    }
+}
+
+float Find_median(int data[] , int n)
+{
+    float median=0;
+    if(n%2 == 0)
+        median = (data[(n-1)/2] + data[n/2])/2.0;
+    else
+        median = data[n/2];
+    
+    return median;
+}
+
+
+int main() {
+    int n, data[100];
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+     scanf("%d", &data[i]);
+ 
+ Array_sort(data,n);
+    printf("Maximum: %d\n",data[n-1]);
+    printf("Minimum: %d\n",data[0]);
+    printf("Median: %.1f\n",Find_median(data,n));
+    printf("Standard Deviation: %.1f\n", stdev(data,n));
+    return 0;
+}
